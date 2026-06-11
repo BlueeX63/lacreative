@@ -46,7 +46,7 @@ export default function ContactSection() {
       <motion.div 
         initial={{ opacity: 0, y: 150, rotateX: 20, scale: 0.9 }}
         whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-        viewport={{ once: false, amount: 0.2 }}
+        viewport={{ once: false, amount: 0 }}
         transition={{ duration: 1.2, type: "spring", bounce: 0.3 }}
         className="max-w-6xl w-full mx-auto relative z-10 bg-[#ebe3f2]/90 backdrop-blur-2xl shadow-[0_40px_80px_rgba(59,18,91,0.15)] flex flex-col md:flex-row border border-white/50"
       >
@@ -59,7 +59,7 @@ export default function ContactSection() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: false, amount: 0 }}
             transition={{ duration: 0.8, staggerChildren: 0.2 }}
             className="relative z-10"
           >
@@ -90,24 +90,23 @@ export default function ContactSection() {
               Let's shake things up together. At LA Creative Marketing, we believe bold ideas deserve bold execution—and we're here to make that happen. Whether you're ready to start a new project or just want to explore the possibilities, reach out today and let's create something unforgettable.
             </motion.p>
             <motion.button 
-              whileHover={{ scale: 1.05, letterSpacing: "0.25em" }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
               transition={{ duration: 0.8 }}
-              className="bg-linear-to-r from-[#2a4569] to-[#248991] text-white text-[11px] tracking-[0.2em] uppercase font-bold py-4 px-8 hover:shadow-[0_10px_30px_rgba(36,137,145,0.4)] transition-all flex items-center gap-4 w-fit overflow-hidden relative group/btn"
+              className="bg-transparent border border-[#248991] text-[#248991] text-[11px] tracking-[0.2em] uppercase font-bold py-4 px-8 cursor-pointer flex items-center gap-4 w-fit overflow-hidden relative group/btn transition-colors duration-500 hover:border-transparent"
             >
-              <motion.span 
-                animate={{ x: ["-100%", "200%"] }} 
-                transition={{ repeat: Infinity, duration: 2, ease: "linear" }} 
-                  className="absolute inset-0 w-full h-full bg-white/20 skew-x-45 z-0"
-              ></motion.span>
-              <span className="relative z-10">GET STARTED</span>
-              <motion.span 
-                whileHover={{ x: 8 }}
-                className="text-lg leading-none relative z-10"
-              >→</motion.span>
+              {/* Premium Liquid Fill */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#2a4569] to-[#248991] translate-y-[100%] group-hover/btn:translate-y-[0%] transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] z-0" />
+              
+              {/* Cinematic Text Reveal */}
+              <div className="relative z-10 overflow-hidden h-4 flex items-center">
+                <span className="block group-hover/btn:-translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] tracking-[0.2em]">GET STARTED</span>
+                <span className="absolute inset-0 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] tracking-[0.2em] text-white">GET STARTED</span>
+              </div>
+              
+              <span className="text-lg leading-none relative z-10 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/btn:translate-x-2 group-hover/btn:text-white">→</span>
             </motion.button>
           </motion.div>
         </div>
@@ -117,7 +116,7 @@ export default function ContactSection() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: false, amount: 0 }}
             transition={{ staggerChildren: 0.15 }}
           >
             <motion.h3 
@@ -152,8 +151,8 @@ export default function ContactSection() {
 
               <motion.div variants={formItemVariants} className="flex items-center border-b border-[#a07cba] pb-2 pt-4 relative group/input">
                 <span className="text-sm text-[#333] mr-2">Message |</span>
-                <select className="flex-1 outline-none text-[#333] text-sm appearance-none cursor-pointer font-bold bg-[#d6ccdf] px-2 py-1 rounded-sm w-max peer relative z-10 hover:bg-[#c9bcd5] transition-colors">
-                  <option value="" disabled selected>Choose Service</option>
+                <select defaultValue="" className="flex-1 outline-none text-[#333] text-sm appearance-none cursor-pointer font-bold bg-[#d6ccdf] px-2 py-1 rounded-sm w-max peer relative z-10 hover:bg-[#c9bcd5] transition-colors">
+                  <option value="" disabled>Choose Service</option>
                   <option value="branding">Branding</option>
                   <option value="web-design">Web Design</option>
                   <option value="seo">SEO</option>
@@ -170,22 +169,24 @@ export default function ContactSection() {
               </motion.div>
 
               <motion.button 
-                variants={formItemVariants}
-                whileHover={{ scale: 1.05, letterSpacing: "0.25em" }}
                 whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.8 }}
                 type="submit" 
-                className="bg-linear-to-r from-[#3b125b] to-[#248991] text-white text-[11px] tracking-[0.2em] uppercase font-bold py-4 px-8 mt-8 hover:shadow-[0_15px_40px_rgba(59,18,91,0.5)] transition-all flex items-center gap-4 w-fit overflow-hidden relative group/btn"
+                className="bg-transparent border border-[#248991] text-[#248991] text-[11px] tracking-[0.2em] uppercase font-bold py-4 px-8 mt-8 cursor-pointer flex items-center gap-4 w-fit overflow-hidden relative group transition-colors duration-500 hover:border-transparent"
               >
-                <motion.span 
-                  animate={{ x: ["-100%", "200%"] }} 
-                  transition={{ repeat: Infinity, duration: 2.5, ease: "linear", delay: 1 }} 
-                  className="absolute inset-0 w-full h-full bg-white/20 skew-x-45 z-0"
-                ></motion.span>
-                <span className="relative z-10">SUBMIT</span>
-                <motion.span 
-                  whileHover={{ x: 8 }}
-                  className="text-lg leading-none relative z-10"
-                >→</motion.span>
+                {/* Premium Liquid Fill */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#2a4569] to-[#248991] translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] z-0" />
+                
+                {/* Cinematic Text Reveal */}
+                <div className="relative z-10 overflow-hidden h-4 flex items-center">
+                  <span className="block group-hover:-translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] tracking-[0.2em]">SUBMIT</span>
+                  <span className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] tracking-[0.2em] text-white">SUBMIT</span>
+                </div>
+                
+                <span className="text-lg leading-none relative z-10 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:translate-x-2 group-hover:text-white">→</span>
               </motion.button>
             </form>
           </motion.div>

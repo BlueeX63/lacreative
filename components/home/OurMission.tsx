@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate, useScroll } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function OurMission() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,6 +15,14 @@ export default function OurMission() {
   });
   const containerScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
   const containerY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Motion values for the mouse position relative to the center of the card
   const x = useMotionValue(0);
@@ -71,7 +79,7 @@ export default function OurMission() {
       />
 
       <motion.div 
-        style={{ scale: containerScale, y: containerY }}
+        style={{ scale: containerScale, y: mobile ? 0 : containerY }}
         className="max-w-6xl w-full mx-auto relative z-10"
       >
         <motion.div
@@ -86,9 +94,9 @@ export default function OurMission() {
           }}
           initial={{ opacity: 0, rotateX: 45, scale: 0.8 }}
           whileInView={{ opacity: 1, rotateX: 0, scale: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: false, amount: 0 }}
           transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
-          className="relative w-full rounded-[40px] border border-white/10 bg-white/2 backdrop-blur-3xl overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] p-8 md:p-16 lg:p-24 cursor-crosshair"
+          className="relative w-full border border-white/10 bg-white/2 backdrop-blur-3xl overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] p-8 md:p-16 lg:p-24 cursor-crosshair"
         >
           {/* Dynamic Glow Effect following mouse */}
           <motion.div 

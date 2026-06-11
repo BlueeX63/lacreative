@@ -109,7 +109,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button 
           onClick={toggleMenu}
-          className="lg:hidden text-black p-2 relative z-[60]"
+          className={`lg:hidden text-black p-2 z-[60] ${isOpen ? 'fixed top-[25px] left-8' : 'relative'}`}
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -145,7 +145,7 @@ export default function Navbar() {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="fixed inset-0 bg-black z-40 origin-top flex flex-col justify-center px-8"
+            className="fixed inset-0 bg-black z-40 origin-top flex flex-col justify-center px-8 touch-none overscroll-none"
           >
             <motion.div
               variants={containerVars}
@@ -155,13 +155,15 @@ export default function Navbar() {
               className="flex flex-col space-y-6"
             >
               {ALL_LINKS.map((link) => (
-                <div key={link.name} className="overflow-hidden">
+                <div key={link.name} className="overflow-hidden w-full max-w-sm mx-auto">
                   <motion.div variants={mobileLinkVars}>
                     <Link
                       href={link.href}
                       onClick={toggleMenu}
-                      className={`text-4xl sm:text-5xl font-bold uppercase tracking-widest transition-colors ${
-                        pathname === link.href ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-teal-400" : "text-white hover:text-purple-400"
+                      className={`block py-4 text-2xl sm:text-3xl font-light uppercase tracking-[0.15em] transition-all duration-300 border-b border-white/10 text-center hover:bg-white/5 ${
+                        pathname === link.href 
+                          ? "text-teal-400 border-teal-400/30 bg-white/5" 
+                          : "text-white/90 hover:text-purple-300 hover:border-purple-400/30"
                       }`}
                     >
                       {link.name}

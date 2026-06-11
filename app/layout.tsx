@@ -28,15 +28,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${bodoni.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${bodoni.variable} h-full antialiased bg-black`}
     >
-      <body className="min-h-full flex flex-col bg-white text-black font-sans">
+      <body className="min-h-full flex flex-col bg-black text-black font-sans overflow-x-hidden">
         <LenisProvider />
         <Navbar />
-        <main className="grow flex flex-col">
+        <main className="grow flex flex-col relative z-10">
           {children}
         </main>
-        <Footer />
+        <div className="relative z-20 bg-black">
+          <Footer />
+        </div>
       </body>
     </html>
   );

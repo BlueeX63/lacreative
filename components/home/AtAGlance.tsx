@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const images = [
   { src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop", alt: "New Orleans Superdome" },
@@ -19,7 +19,20 @@ export default function AtAGlance() {
   const y2 = useTransform(scrollYProgress, [0, 1], [-100, 100]);
   const y3 = useTransform(scrollYProgress, [0, 1], [50, -150]);
 
-  const transforms = [y1, y2, y3];
+  const [mobile, setMobile] = useState(false);
+  
+  useEffect(() => {
+    const handleResize = () => setMobile(window.innerWidth < 768);
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const transforms = [
+    mobile ? 0 : y1, 
+    mobile ? 0 : y2, 
+    mobile ? 0 : y3
+  ];
 
   return (
     <section ref={sectionRef} className="w-full bg-white py-32 px-6 md:px-12 lg:px-24 overflow-hidden perspective-[1500px]">
@@ -30,7 +43,7 @@ export default function AtAGlance() {
             <motion.h2 
               initial={{ opacity: 0, x: -100, rotateY: -45 }}
               whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: false, amount: 0 }}
               transition={{ duration: 1, type: "spring", bounce: 0.4 }}
               className="text-[#3b125b] font-serif text-[50px] sm:text-[70px] lg:text-[100px] leading-[0.9] tracking-tight uppercase drop-shadow-2xl"
             >
@@ -49,24 +62,32 @@ export default function AtAGlance() {
             {images.map((img, idx) => (
               <motion.div
                 key={idx}
-                style={{ y: transforms[idx] }}
-                initial={{ opacity: 0, scale: 0.8, rotateX: 30 }}
-                whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
-                whileHover={{ scale: 1.05, zIndex: 50, rotateY: idx % 2 === 0 ? 5 : -5, boxShadow: "0px 30px 60px rgba(0,0,0,0.3)" }}
-                viewport={{ once: false, margin: "-100px" }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 1, delay: idx * 0.1, type: "spring" }}
-                className={`group cursor-pointer relative w-full md:h-112.5 lg:h-150 overflow-hidden shadow-xl ${
+                whileHover={{ 
+                  scale: 0.95, 
+                  rotateZ: idx === 1 ? -1 : 1, 
+                  y: -5,
+                  transition: { duration: 0.8, ease: [0.19, 1, 0.22, 1] } 
+                }}
+                className={`group cursor-pointer relative w-full md:h-112.5 lg:h-150 overflow-hidden shadow-2xl transition-shadow duration-700 hover:shadow-[0_30px_60px_rgba(36,137,145,0.3)] ${
                   idx === 1 ? "md:w-[40%] aspect-square md:aspect-auto z-10" : "md:w-[30%] aspect-3/4 md:aspect-auto"
                 }`}
               >
                 <motion.div 
-                  className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"
+                  className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-700 ease-out z-10 pointer-events-none"
                 ></motion.div>
+                
+                {/* Premium Glass Sheen Effect */}
+                <div className="absolute inset-0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] bg-gradient-to-r from-transparent via-white/20 to-transparent z-20 skew-x-12 pointer-events-none"></div>
+
                 <Image
                   src={img.src}
                   alt={img.alt}
                   fill
-                  className="object-cover object-center transition-transform duration-1000 group-hover:scale-110"
+                  className="object-cover object-center"
                 />
               </motion.div>
             ))}
@@ -77,7 +98,7 @@ export default function AtAGlance() {
         <motion.div 
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: false, amount: 0 }}
           transition={{ duration: 1, delay: 0.2, type: "spring" }}
           className="max-w-4xl mx-auto mt-32 text-center flex flex-col items-center relative"
         >

@@ -1,57 +1,75 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { FaInstagram, FaFacebookF, FaLinkedinIn, FaPinterestP, FaYoutube, FaTiktok, FaXTwitter, FaArrowRight } from "react-icons/fa6";
 
-const TikTokIcon = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-  </svg>
-);
+function MagneticSocialIcon({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37" />
-    <circle cx="17.5" cy="6.5" r="1.5" />
-  </svg>
-);
+  const springConfig = { stiffness: 150, damping: 15, mass: 0.1 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
 
-const FacebookIcon = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 2h-3a6 6 0 0 0-6 6v4a6 6 0 0 0 6 6h3" />
-    <path d="M7 20V9" />
-    <path d="M4 12h7" />
-  </svg>
-);
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!ref.current) return;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    const distanceX = e.clientX - centerX;
+    const distanceY = e.clientY - centerY;
+    
+    x.set(distanceX * 0.5);
+    y.set(distanceY * 0.5);
+  };
 
-const LinkedinIcon = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    x.set(0);
+    y.set(0);
+  };
 
-const YoutubeIcon = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.25z" />
-    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
-  </svg>
-);
-
-const TwitterIcon = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2s9 5 20 5a9.5 9.5 0 0 0-9-5.5c4.75 2.25 7-7 7-7" />
-  </svg>
-);
-
-const PinterestIcon = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <path d="M8 20l4-9" />
-    <path d="M10.7 14c.4 3 2.5 3 3.5 2 1.3-1.3 1.8-4.5-1.5-5.5-2.5-.8-4.2.7-4 2.5.3 2 1.8 1.5 1.8 1.5" />
-  </svg>
-);
+  return (
+    <motion.a
+      ref={ref}
+      href="#"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      whileTap={{ scale: 0.9 }}
+      style={{ x: springX, y: springY }}
+      className="relative w-11 h-11 rounded-full flex items-center justify-center bg-white/5 border border-white/10 overflow-hidden cursor-pointer shadow-lg group/social"
+    >
+      {/* Liquid background fill */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-purple-600 via-teal-500 to-blue-500 rounded-full"
+        initial={{ y: "100%", scale: 0.8 }}
+        animate={{ 
+          y: isHovered ? "0%" : "100%",
+          scale: isHovered ? 1 : 0.8,
+        }}
+        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+      />
+      
+      {/* Inner Parallax Icon */}
+      <motion.div 
+        style={{ x: useTransform(springX, (v) => v * 0.5), y: useTransform(springY, (v) => v * 0.5) }}
+        className="relative z-10 flex items-center justify-center text-white/80 group-hover/social:text-white transition-colors duration-300"
+      >
+        <motion.div
+          animate={{ scale: isHovered ? 1.15 : 1, rotate: isHovered ? [0, -10, 10, 0] : 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
+          {children}
+        </motion.div>
+      </motion.div>
+    </motion.a>
+  );
+}
 
 export default function Footer() {
   const containerVariants = {
@@ -68,13 +86,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full bg-[#111111] text-white py-16 md:py-20 px-6 md:px-12 lg:px-24 border-t border-[#333]">
+    <footer className="w-full bg-[#0a0a0a] text-white py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-teal-900/20 blur-[150px] pointer-events-none rounded-[100%]" />
+      
       <motion.div 
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
-        className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start gap-12 lg:gap-8"
+        viewport={{ once: false, amount: 0 }}
+        className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start gap-16 lg:gap-8 relative z-10"
       >
         
         {/* Left Column: Logo & Socials */}
@@ -82,86 +103,128 @@ export default function Footer() {
           
           {/* Custom Logo */}
           <div className="flex items-center gap-4 cursor-pointer group">
-            <div className="relative w-12 h-12 flex items-center justify-center group-hover:rotate-6 transition-transform duration-500">
-               <div className="absolute inset-0 bg-linear-to-br from-[#1b3b64] to-[#3a1d5c] -skew-x-12 transform scale-y-[1.2]"></div>
-               <div className="absolute inset-0 flex items-center justify-center space-x-1 z-10 text-white font-sans">
-                 <span className="text-3xl font-black italic -ml-1">L</span>
-                 <span className="text-3xl font-light italic">A</span>
-               </div>
+            <div className="w-[60px] h-[60px] bg-gradient-to-br from-[#41196E] via-[#6533A8] to-[#12797e] flex items-center justify-center shadow-[0_0_30px_rgba(101,51,168,0.3)] group-hover:shadow-[0_0_50px_rgba(101,51,168,0.6)] group-hover:scale-110 transition-all duration-500 rounded-lg">
+              <span className="text-white text-2xl font-black italic tracking-tighter">LA</span>
             </div>
             
             <div className="flex flex-col">
-              <span className="text-xl font-semibold tracking-widest uppercase leading-none text-white">Creative</span>
-              <span className="text-[10px] tracking-[0.3em] uppercase leading-none mt-1 text-white/80">Marketing</span>
-              <div className="h-px w-full bg-teal-500 mt-1 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+              <span className="text-xl font-semibold tracking-widest uppercase leading-none text-white group-hover:text-teal-400 transition-colors duration-300">Creative</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase leading-none mt-1 text-white/80 group-hover:text-white transition-colors duration-300">Marketing</span>
+              <div className="h-px w-full bg-gradient-to-r from-teal-500 to-purple-600 mt-1 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
             </div>
           </div>
 
           {/* Social Icons */}
-          <div className="flex space-x-3 mt-4">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-4">
           {[
-              { icon: <InstagramIcon /> },
-              { icon: <FacebookIcon /> },
-              { icon: <LinkedinIcon /> },
-              { icon: <PinterestIcon /> },
-              { icon: <YoutubeIcon /> },
-              { icon: <TikTokIcon /> },
-              { icon: <TwitterIcon /> },
+              { icon: <FaInstagram size={17} /> },
+              { icon: <FaFacebookF size={16} /> },
+              { icon: <FaLinkedinIn size={17} /> },
+              { icon: <FaPinterestP size={17} /> },
+              { icon: <FaYoutube size={18} /> },
+              { icon: <FaTiktok size={17} /> },
+              { icon: <FaXTwitter size={16} /> },
             ].map((social, idx) => (
-              <motion.a 
-                key={idx}
-                href="#"
-                whileHover={{ scale: 1.15, y: -3, backgroundColor: "#ffffff", color: "#111111" }}
-                whileTap={{ scale: 0.95 }}
-                className="w-8 h-8 rounded-full bg-white text-[#111] flex items-center justify-center transition-colors duration-300"
-              >
+              <MagneticSocialIcon key={idx}>
                 {social.icon}
-              </motion.a>
+              </MagneticSocialIcon>
             ))}
           </div>
 
-          <p className="text-[11px] tracking-widest text-white/70 uppercase">
+          <p className="text-[10px] tracking-[0.3em] text-white/50 uppercase font-light">
             FOLLOW US | @LACREATIVEMARKETING
           </p>
         </motion.div>
 
         {/* Center Column: Newsletter */}
-        <motion.div variants={itemVariants} className="flex flex-col items-center lg:w-1/3 text-center lg:text-left space-y-6">
-          <h4 className="text-[11px] tracking-widest uppercase text-white/90 font-semibold mb-2">
-            STAY CONNECTED WITH L.A. CREATIVE MARKETING'S BLOGS!
-          </h4>
+        <motion.div variants={itemVariants} className="flex flex-col items-center lg:w-[40%] text-center lg:text-left space-y-8">
+          <div className="space-y-3">
+            <h4 className="text-[13px] tracking-[0.2em] uppercase text-white font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-400">
+              STAY CONNECTED
+            </h4>
+            <p className="text-sm text-white/60 font-light max-w-sm mx-auto lg:mx-0">
+              Join our newsletter for the latest insights, exclusive content, and creative marketing strategies.
+            </p>
+          </div>
           
-          <form className="flex w-full max-w-md shadow-2xl relative group/form overflow-hidden" onSubmit={(e) => e.preventDefault()}>
+          <form className="w-full max-w-md relative group" onSubmit={(e) => e.preventDefault()}>
+            <div className="relative flex items-center w-full h-[60px] rounded-full bg-white/5 border border-white/10 overflow-hidden transition-all duration-500 focus-within:bg-white/10 focus-within:border-teal-500/50 hover:border-white/30 shadow-[0_0_0_rgba(0,0,0,0)] focus-within:shadow-[0_0_30px_rgba(30,139,140,0.2)]">
+              
+              <input 
+                type="email" 
+                placeholder="Enter your email address" 
+                className="w-full h-full bg-transparent text-white px-6 outline-none text-[13px] placeholder:text-white/30"
+                required
+              />
+              
+              <button className="absolute right-2 top-2 bottom-2 px-6 rounded-full bg-white text-black font-bold tracking-[0.1em] text-[10px] uppercase overflow-hidden group/btn flex items-center justify-center gap-2 hover:text-white transition-colors duration-300">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-teal-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+                />
+                <span className="relative z-10 hidden sm:block">Subscribe</span>
+                <span className="relative z-10 w-5 h-5 flex items-center justify-center overflow-hidden">
+                  <motion.div 
+                    className="flex items-center absolute"
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 30 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  >
+                    <FaArrowRight size={12} />
+                  </motion.div>
+                  <motion.div 
+                    className="flex items-center absolute -translate-x-[30px]"
+                    initial={{ x: -30 }}
+                    whileHover={{ x: 0 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  >
+                    <FaArrowRight size={12} />
+                  </motion.div>
+                </span>
+              </button>
+
+            </div>
+            
+            {/* Animated Underline Effect */}
             <motion.div 
-              className="absolute inset-0 bg-teal-500/20 -translate-x-full group-hover/form:animate-[shimmer_2s_infinite] pointer-events-none"
-            ></motion.div>
-            <input 
-              type="email" 
-              placeholder="Email" 
-              className="flex-1 bg-white text-black px-4 py-3 outline-none text-xs"
-              required
+              className="absolute -bottom-2 left-1/2 h-[1px] bg-gradient-to-r from-transparent via-teal-400 to-transparent"
+              initial={{ width: "0%", x: "-50%", opacity: 0 }}
+              whileInView={{ width: "80%", opacity: 0.5 }}
+              transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
             />
-            <button className="bg-[#248991] hover:bg-[#1a666d] text-white px-6 py-3 text-[11px] font-bold tracking-widest uppercase transition-colors flex items-center">
-              SUBSCRIBE
-            </button>
-            <button className="bg-[#2ebab7] hover:bg-[#249694] text-white px-4 py-3 transition-colors flex items-center justify-center">
-              →
-            </button>
           </form>
         </motion.div>
 
         {/* Right Column: Contact Details */}
-        <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start lg:w-1/4 lg:pl-12 border-t lg:border-t-0 lg:border-l border-[#333] pt-8 lg:pt-0">
-          <div className="space-y-4 text-center lg:text-left">
-            <h4 className="text-[11px] tracking-widest uppercase text-white font-semibold">
-              CONTACT DETAILS
-            </h4>
-            <p className="text-xs text-white/80 hover:text-teal-400 transition-colors cursor-pointer">
-              (504) 214-0552
-            </p>
-            <p className="text-xs text-white/80 hover:text-teal-400 transition-colors cursor-pointer">
-              grow@lacreativemarketing.com
-            </p>
+        <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start lg:w-1/4 lg:pl-12 border-t lg:border-t-0 lg:border-l border-white/10 pt-10 lg:pt-0">
+          <div className="space-y-6 text-center lg:text-left">
+            <div>
+              <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/50 mb-2">
+                Phone
+              </h4>
+              <p className="text-[14px] font-medium text-white hover:text-teal-400 transition-colors cursor-pointer group flex items-center gap-2 justify-center lg:justify-start">
+                (504) 214-0552
+                <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">↗</span>
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/50 mb-2">
+                Email
+              </h4>
+              <p className="text-[14px] font-medium text-white hover:text-purple-400 transition-colors cursor-pointer group flex items-center gap-2 justify-center lg:justify-start">
+                grow@lacreativemarketing.com
+                <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">↗</span>
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/50 mb-2 mt-4">
+                Location
+              </h4>
+              <p className="text-[13px] text-white/80 font-light">
+                New Orleans, LA
+              </p>
+            </div>
           </div>
         </motion.div>
 

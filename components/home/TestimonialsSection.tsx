@@ -41,54 +41,46 @@ export default function TestimonialsSection() {
   const yGlow2 = useTransform(scrollYProgress, [0, 1], [200, -200]);
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 150, rotateX: 45, scale: 0.8 },
+    hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
     visible: (idx: number) => ({
       opacity: 1,
       y: 0,
-      rotateX: 0,
-      scale: 1,
+      filter: "blur(0px)",
       transition: {
-        delay: idx * 0.2,
-        duration: 0.8,
-        type: "spring" as const,
-        bounce: 0.4
+        delay: idx * 0.15,
+        duration: 1.2,
+        ease: [0.16, 1, 0.3, 1]
       }
     })
   } as any;
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#111111] py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden perspective-[2000px]">
-      {/* Top Right Cyan Glow (Animated Parallax) */}
-      <motion.div 
-        style={{ y: yGlow1 }}
-        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-        className="absolute top-[2%] right-[15%] w-62.5 h-62.5 bg-[#3fd5d3]/20 rounded-full blur-2xl pointer-events-none"
-      ></motion.div>
+    <section ref={sectionRef} className="w-full bg-[#0a0a0a] py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden">
+      {/* Top Right Cyan Glow */}
+      <div 
+        className="absolute top-[5%] right-[15%] w-[250px] h-[250px] bg-[#3fd5d3]/25 rounded-full blur-[25px] pointer-events-none opacity-40"
+      ></div>
       
-      {/* Bottom Left Subtle Glow (Animated Parallax) */}
-      <motion.div 
-        style={{ y: yGlow2 }}
-        animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-[-15%] left-[-5%] w-175 h-100 bg-[#3fd5d3]/10 rounded-full blur-2xl pointer-events-none"
-      ></motion.div>
+      {/* Bottom Left Subtle Glow */}
+      <div 
+        className="absolute bottom-[-15%] left-[-5%] w-[600px] h-[400px] bg-[#3fd5d3]/25 rounded-full blur-[70px] pointer-events-none opacity-30"
+      ></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
-          whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-          viewport={{ once: false, amount: 0.5 }}
-          transition={{ duration: 1, type: "spring", bounce: 0.5 }}
+          initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: false, amount: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="mb-24 flex justify-center"
         >
           <h2 className="text-center font-serif text-[40px] md:text-[65px] lg:text-[75px] leading-[1.15] text-white uppercase tracking-wide">
             WHAT OUR CLIENTS<br />
             <motion.span 
-              initial={{ color: "#ffffff", textShadow: "0px 0px 0px rgba(63,213,211,0)" }}
-              whileInView={{ color: "#3fd5d3", textShadow: "0px 0px 20px rgba(63,213,211,0.5)" }}
+              initial={{ color: "#ffffff", filter: "blur(5px)" }}
+              whileInView={{ color: "#3fd5d3", filter: "blur(0px)" }}
               viewport={{ once: false }}
-              transition={{ delay: 0.5, duration: 1 }}
+              transition={{ delay: 0.5, duration: 1.5, ease: "easeOut" }}
               className="inline-block"
             >
               HAVE TO SAY
@@ -96,7 +88,7 @@ export default function TestimonialsSection() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center">
           {testimonials.map((testimonial, idx) => (
             <motion.div
               custom={idx}
@@ -104,45 +96,36 @@ export default function TestimonialsSection() {
               initial="hidden"
               whileInView="visible"
               whileHover={{ 
-                scale: 1.05, 
-                y: -20, 
-                rotateY: idx === 1 ? 0 : (idx === 0 ? 5 : -5),
-                boxShadow: "0px 30px 60px rgba(63, 213, 211, 0.25)"
+                y: -10, 
+                transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
               }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: false, amount: 0 }}
               key={idx}
-              className={`bg-[#fcfcfc] flex flex-col shadow-2xl transition-colors duration-500 hover:bg-white cursor-pointer relative overflow-hidden group ${
+              className={`flex flex-col relative overflow-hidden group rounded-md bg-[#111] border border-white/5 transition-all duration-700 hover:border-white/15 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] cursor-pointer ${
                 testimonial.isMiddle 
-                  ? "py-24 px-10 md:py-28 z-10 relative" 
-                  : "py-16 px-10"
+                  ? "py-20 px-8 md:py-24 z-10 relative md:scale-105 bg-[#141414]" 
+                  : "py-16 px-8"
               }`}
             >
-              {/* Animated Inner Border on Hover */}
-              <motion.div className="absolute inset-0 border-2 border-teal-400 opacity-0 group-hover:opacity-100 scale-105 group-hover:scale-100 transition-all duration-500 z-0"></motion.div>
+              {/* Sophisticated Sheen Hover Effect */}
+              <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-[1.5s] ease-in-out bg-gradient-to-r from-transparent via-white/[0.04] to-transparent z-0 skew-x-12 pointer-events-none"></div>
 
-              <motion.div 
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6, type: "spring" }}
-                className="w-20 h-20 rounded-full border border-gray-300 flex items-center justify-center mb-10 bg-white mx-auto shadow-inner relative z-10"
+              <div 
+                className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center mb-10 bg-black/50 mx-auto relative z-10 group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-inner"
               >
                 {testimonial.logo}
-              </motion.div>
+              </div>
               
-              <p className="text-[#333] text-[13px] md:text-[14px] leading-[1.8] mb-12 grow text-left relative z-10 group-hover:text-black transition-colors duration-300">
-                {testimonial.text}
+              <p className="text-zinc-400 font-light text-[14px] md:text-[15px] leading-relaxed mb-12 grow text-center relative z-10 group-hover:text-zinc-200 transition-colors duration-700">
+                "{testimonial.text}"
               </p>
               
-              <h4 className="text-[#111] font-bold text-[12px] md:text-[13px] tracking-widest uppercase mt-auto text-left whitespace-pre-line relative overflow-hidden z-10">
-                <span className="relative z-10">{testimonial.author}</span>
-                <motion.span 
-                  className="absolute -bottom-1 left-0 h-0.5 bg-teal-500 origin-left"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: false }}
-                  transition={{ delay: 0.8 + idx * 0.2, duration: 0.8 }}
-                  style={{ width: "100%" }}
-                ></motion.span>
-              </h4>
+              <div className="mt-auto text-center relative z-10">
+                <div className="h-px w-8 bg-white/10 mx-auto mb-6 group-hover:w-16 group-hover:bg-teal-500/50 transition-all duration-700 ease-out"></div>
+                <h4 className="text-white/90 font-semibold text-[10px] md:text-[11px] tracking-[0.25em] uppercase whitespace-pre-line group-hover:text-white transition-colors duration-700">
+                  {testimonial.author}
+                </h4>
+              </div>
             </motion.div>
           ))}
         </div>

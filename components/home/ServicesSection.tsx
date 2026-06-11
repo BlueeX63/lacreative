@@ -63,7 +63,7 @@ export default function ServicesSection() {
           <motion.div 
             initial={{ opacity: 0, rotateX: -45, y: 50 }}
             whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: false, amount: 0 }}
             transition={{ duration: 1, type: "spring", bounce: 0.4 }}
             className="lg:w-1/2 transform-gpu"
           >
@@ -82,7 +82,7 @@ export default function ServicesSection() {
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: false, amount: 0 }}
             transition={{ duration: 1, delay: 0.2, type: "spring" }}
             className="lg:w-1/2 lg:pl-12"
           >
