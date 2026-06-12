@@ -124,7 +124,7 @@ export default function Hero() {
           className="absolute inset-0 h-[120%]"
         >
           <Image
-            src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=2000&auto=format&fit=crop"
+            src="/images/home/images/Mask group.png"
             alt="Person wearing LAKEN ALEXANDER jacket"
             fill
             className="object-cover object-center"

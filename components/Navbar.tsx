@@ -86,8 +86,8 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 top-0 flex items-center justify-center">
-          <div className="w-[90px] h-[90px] bg-gradient-to-br from-[#41196E] via-[#6533A8] to-[#12797e] flex items-center justify-center shadow-lg">
-            <span className="text-white text-3xl font-black italic tracking-tighter">LA</span>
+          <div className="w-[90px] h-[90px] flex items-center justify-center shadow-lg">
+            <img src="/images/home/images/logo.png" alt="LA Creative Marketing" className="w-full h-full object-cover" />
           </div>
         </Link>
 

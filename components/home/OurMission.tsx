@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate, useScroll } from "framer-motion";
+import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
 export default function OurMission() {
@@ -113,9 +114,9 @@ export default function OurMission() {
             <div className="w-full lg:w-1/3 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/10 pb-12 lg:pb-0 lg:pr-16">
               <motion.div 
                 style={{ transform: "translateZ(120px)" }}
-                className="text-[120px] lg:text-[180px] font-serif leading-none tracking-tighter text-white/90 drop-shadow-[0_0_50px_rgba(255,255,255,0.4)]"
+                className="w-48 h-48 lg:w-64 lg:h-64 relative drop-shadow-[0_0_50px_rgba(255,255,255,0.4)]"
               >
-                LA
+                <Image src="/images/home/images/third slide logo.png" alt="LA Logo" fill className="object-contain" />
               </motion.div>
               <h2 className="text-white font-serif text-4xl lg:text-5xl mt-6 tracking-wide">
                 <motion.span 

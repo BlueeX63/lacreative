@@ -7,37 +7,37 @@ const services = [
   {
     title: "Branding",
     description: "We craft cohesive brand identities that capture your vision and connect with your audience.",
-    imageSrc: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop",
+    imageSrc: "/images/home/images/fourth slide img1.png",
     imageAlt: "Branding Service",
   },
   {
     title: "Graphic Design",
     description: "From logos to marketing materials, we design visuals that make your message impossible to ignore.",
-    imageSrc: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop",
+    imageSrc: "/images/home/images/fourth slide img2.png",
     imageAlt: "Graphic Design Service",
   },
   {
     title: "Web Design",
     description: "We design modern, user-friendly websites that blend creativity with performance.",
-    imageSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop",
+    imageSrc: "/images/home/images/fourth slide img 3.png",
     imageAlt: "Web Design Service",
   },
   {
     title: "Photography",
     description: "We produce high-quality content that tells your story, sparks emotion, and drives engagement.",
-    imageSrc: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop",
+    imageSrc: "/images/home/images/fourth slide img 4.png",
     imageAlt: "Photography Service",
   },
   {
     title: "Videography",
     description: "We produce high-quality content that tells your story, sparks emotion, and drives engagement.",
-    imageSrc: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop",
+    imageSrc: "/images/home/images/fourth slide img 5.png",
     imageAlt: "Videography Service",
   },
   {
     title: "Email & Social Media Marketing",
     description: "We create campaigns that spark conversations, build loyalty, and keep your audience engaged.",
-    imageSrc: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop",
+    imageSrc: "/images/home/images/fourth slide img 6.png",
     imageAlt: "Email & Social Media Marketing Service",
   },
 ];
@@ -45,7 +45,7 @@ const services = [
 const seoService = {
   title: "SEO",
   description: "We boost your visibility with strategies that improve rankings, drive traffic, and connect you with the right audience.",
-  imageSrc: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+  imageSrc: "/images/home/images/fourth slide img 7.png",
   imageAlt: "SEO Service",
 };
 

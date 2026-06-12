@@ -4,11 +4,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const images = [
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=400&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=400&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?q=80&w=400&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400&auto=format&fit=crop",
+  "/images/home/images/IMG_0515 1.png",
+  "/images/home/images/Group 175.png",
+  "/images/home/images/fifth slide third image.png",
+  "/images/home/images/IMG_0252 1.png",
+  "/images/home/images/fifth slide fifth img.png",
 ];
 
 const containerVariants = {
@@ -117,7 +117,7 @@ export default function NationwideSection() {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute inset-0 bg-teal-400/30 blur-[100px] rounded-full -z-10"
             ></motion.div>
-            <img src="/us_map.png" alt="Map of USA highlighting nationwide clients" className="w-full h-auto object-contain transition-transform duration-700" />
+            <img src="/images/home/images/fifthe slide map img.png" alt="Map of USA highlighting nationwide clients" className="w-full h-auto object-contain transition-transform duration-700" />
           </motion.div>
         </motion.div>
 
@@ -127,41 +127,9 @@ export default function NationwideSection() {
           whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
           viewport={{ once: false, amount: 0 }}
           transition={{ duration: 1, type: "spring", bounce: 0.6 }}
-          className="flex items-center justify-center gap-6 group"
+          className="flex items-center justify-center"
         >
-          <div className="relative w-16 h-16 flex items-center justify-center group-hover:rotate-12 transition-transform duration-700">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-[-40%] bg-linear-to-br from-teal-400/40 to-purple-600/40 blur-2xl rounded-full"
-            ></motion.div>
-            <div className="absolute inset-0 bg-linear-to-br from-[#1b3b64] to-[#3a1d5c] -skew-x-12 transform scale-y-[1.2] shadow-2xl group-hover:scale-125 transition-transform duration-500 ease-out"></div>
-            <div className="absolute inset-0 flex items-center justify-center space-x-1 z-10 text-white font-sans">
-              <motion.span whileHover={{ y: -10, rotate: -10 }} className="text-4xl font-black italic -ml-2 transition-transform">L</motion.span>
-              <motion.span whileHover={{ y: 10, rotate: 10 }} className="text-4xl font-light italic transition-transform">A</motion.span>
-            </div>
-          </div>
-
-          <div className="flex flex-col border-b-2 border-transparent group-hover:border-[#3a1d5c] transition-colors duration-500 pb-1 overflow-hidden relative">
-            <motion.span
-              initial={{ x: -100 }}
-              whileInView={{ x: 0 }}
-              viewport={{ once: false }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-              className="text-2xl md:text-[28px] font-semibold tracking-widest text-[#111] uppercase leading-none group-hover:text-teal-700 transition-colors duration-500"
-            >
-              Creative
-            </motion.span>
-            <motion.span
-              initial={{ x: 100 }}
-              whileInView={{ x: 0 }}
-              viewport={{ once: false }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
-              className="text-sm md:text-base tracking-[0.3em] text-[#111] uppercase leading-none mt-2 font-light group-hover:text-purple-700 transition-colors duration-500"
-            >
-              Marketing
-            </motion.span>
-          </div>
+          <img src="/images/home/images/fifth slide logo.png" alt="LA Creative Marketing Logo" className="h-16 md:h-20 lg:h-24 w-auto object-contain" />
         </motion.div>
       </div>
     </section>

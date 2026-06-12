@@ -26,7 +26,7 @@ export default function ServicesPage() {
             </p>
           </>
         }
-        imageSrc="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2000&auto=format&fit=crop"
+        imageSrc="/images/service/images/second slide img.png"
         backgroundColor="bg-[#fbfbfb]"
         textColor="text-black"
         subHeadingIconColor="text-[#2ca59f]"
@@ -46,7 +46,7 @@ export default function ServicesPage() {
             </p>
           </>
         }
-        imageSrc="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop"
+        imageSrc="/images/service/images/Third slide img.png"
         isReversed={false}
         backgroundColor="bg-[#e7e3ef]"
         textColor="text-[#481c75]"
@@ -66,7 +66,7 @@ export default function ServicesPage() {
             </p>
           </>
         }
-        imageSrc="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop"
+        imageSrc="/images/service/images/Fourth Slide img.png"
         backgroundColor="bg-[#effdf7]"
         textColor="text-[#267468]"
         subHeadingIconColor="text-[#3b477b]"
@@ -86,7 +86,7 @@ export default function ServicesPage() {
             </p>
           </>
         }
-        imageSrc="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop"
+        imageSrc="/images/service/images/Screenshot 2026-06-12 003105.png"
         isReversed={false}
         backgroundColor="bg-[#fefefe]"
         textColor="text-black"
@@ -106,7 +106,7 @@ export default function ServicesPage() {
             </p>
           </>
         }
-        imageSrc="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop"
+        imageSrc="/images/service/images/Sixth slide img.png"
         isReversed={true}
         backgroundColor="bg-[#e8e6ee]"
         textColor="text-black"
@@ -126,7 +126,7 @@ export default function ServicesPage() {
             </p>
           </>
         }
-        imageSrc="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=2000&auto=format&fit=crop"
+        imageSrc="/images/service/images/Seventh slide img.png"
         isReversed={false}
         backgroundColor="bg-[#f0fcfa]"
         textColor="text-[#481c75]"
@@ -146,7 +146,7 @@ export default function ServicesPage() {
             </p>
           </>
         }
-        imageSrc="https://images.unsplash.com/photo-1572021335469-31706a17aaef?q=80&w=2000&auto=format&fit=crop"
+        imageSrc="/images/service/images/Eight slide img.png"
         isReversed={true}
         backgroundColor="bg-[#ffffff]"
         textColor="text-[#267468]"

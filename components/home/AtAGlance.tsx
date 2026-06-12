@@ -2,13 +2,12 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
 const images = [
-  { src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop", alt: "New Orleans Superdome" },
-  { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop", alt: "Laken Alexandra" },
-  { src: "https://images.unsplash.com/photo-1518398046578-8cca57782e17?q=80&w=800&auto=format&fit=crop", alt: "French Quarter Balcony" },
+  { src: "/images/home/images/second page.png", alt: "New Orleans Superdome", style: { objectPosition: "left" } },
+  { src: "/images/home/images/second slide middle image.png", alt: "Laken Alexandra", style: { objectPosition: "center" } },
+  { src: "/images/home/images/second page.png", alt: "French Quarter Balcony", style: { objectPosition: "right" } },
 ];
 
 export default function AtAGlance() {
@@ -72,9 +71,10 @@ export default function AtAGlance() {
                   y: -5,
                   transition: { duration: 0.8, ease: [0.19, 1, 0.22, 1] } 
                 }}
-                className={`group cursor-pointer relative w-full md:h-112.5 lg:h-150 overflow-hidden shadow-2xl transition-shadow duration-700 hover:shadow-[0_30px_60px_rgba(36,137,145,0.3)] ${
-                  idx === 1 ? "md:w-[40%] aspect-square md:aspect-auto z-10" : "md:w-[30%] aspect-3/4 md:aspect-auto"
+                className={`group cursor-pointer relative w-full overflow-hidden shadow-2xl transition-shadow duration-700 hover:shadow-[0_30px_60px_rgba(36,137,145,0.3)] ${
+                  idx === 1 ? "md:w-[40%] z-10" : "md:w-[25%]"
                 }`}
+                style={{ aspectRatio: idx === 1 ? "379 / 571" : "260 / 571" }}
               >
                 <motion.div 
                   className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-700 ease-out z-10 pointer-events-none"
@@ -83,11 +83,11 @@ export default function AtAGlance() {
                 {/* Premium Glass Sheen Effect */}
                 <div className="absolute inset-0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] bg-gradient-to-r from-transparent via-white/20 to-transparent z-20 skew-x-12 pointer-events-none"></div>
 
-                <Image
+                <img
                   src={img.src}
                   alt={img.alt}
-                  fill
-                  className="object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={img.style}
                 />
               </motion.div>
             ))}

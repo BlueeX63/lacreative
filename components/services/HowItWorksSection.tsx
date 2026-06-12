@@ -1,21 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle, FileEdit, Send } from "lucide-react";
-
 const steps = [
   {
-    icon: <MessageCircle strokeWidth={1} className="w-16 h-16 text-white mb-6" />,
+    icon: <img src="/images/service/images/first slide first img.png" className="w-16 h-16 mb-6 object-contain" alt="Contact" />,
     title: "CONTACT",
     description: "Reach out through our contact form or schedule a call so we can learn more about your goals."
   },
   {
-    icon: <FileEdit strokeWidth={1} className="w-16 h-16 text-white mb-6" />,
+    icon: <img src="/images/service/images/first slide 2 image.png" className="w-16 h-16 mb-6 object-contain" alt="Create" />,
     title: "CREATE",
     description: "We develop a custom strategy and creative assets tailored to your brand's vision."
   },
   {
-    icon: <Send strokeWidth={1} className="w-16 h-16 text-white mb-6" />,
+    icon: <img src="/images/service/images/first slide img 3.png" className="w-16 h-16 mb-6 object-contain" alt="Launch" />,
     title: "LAUNCH",
     description: "Your project goes live with full support from our team—delivering results that make an impact."
   }
